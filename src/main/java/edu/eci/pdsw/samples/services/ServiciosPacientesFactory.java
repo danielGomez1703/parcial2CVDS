@@ -10,7 +10,9 @@ import org.mybatis.guice.datasource.helper.JdbcHelper;
 
 import static com.google.inject.Guice.createInjector;
 import com.google.inject.Injector;
+import edu.eci.pdsw.samples.persistence.DaoConsulta;
 import edu.eci.pdsw.samples.persistence.DaoPaciente;
+import edu.eci.pdsw.samples.persistence.mybatisimpl.MyBatisDAOConsulta;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.MyBatisDAOPaciente;
 import edu.eci.pdsw.samples.services.impl.ServiciosPacienteImpl;
 
@@ -48,6 +50,7 @@ public class ServiciosPacientesFactory {
                 setClassPathResource("mybatis-config-h2.xml");
                 bind(ServiciosPaciente.class).to(ServiciosPacienteImpl.class);
                 bind(DaoPaciente.class).to(MyBatisDAOPaciente.class);
+                bind(DaoConsulta.class).to(MyBatisDAOConsulta.class);
             }
 
         }

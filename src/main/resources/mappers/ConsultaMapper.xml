@@ -1,11 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.ConsultaMapper">
 
-
-<root>
+    <resultMap type='Consulta' id='ConsultaResult'>
+        <id property='id' column='id'/> 
+        <result property='fecha' column='fecha'/>
+        <result property='resumen' column='resumen'/>
+    </resultMap>
     
-</root>
+    
+    <select id="getConsultas" resultMap="ConsultaResult">
+        SELECT 
+            c.id,
+            c.fecha,
+            c,resumen
+        FROM
+            CONSULTAS as c
+    </select>
+    
+        <select id="getConsulta" resultMap="ConsultaResult">
+        SELECT 
+            c.id,
+            c.fecha,
+            c,resumen
+        FROM
+            CONSULTAS as c 
+            WHERE c.Idn = {#cId}
+    </select>
+    
+</mapper>

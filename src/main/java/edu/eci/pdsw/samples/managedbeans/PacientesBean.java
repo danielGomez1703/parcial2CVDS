@@ -16,11 +16,15 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import edu.eci.cvds.view.PacienteConBean;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.entities.TipoIdentificacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSuscripciones;
 import edu.eci.pdsw.samples.services.ServiciosPacientesFactory;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -31,15 +35,20 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name = "mb")
 @SessionScoped
 public class PacientesBean {
-
+    private List<Paciente> pacientes = new ArrayList<>(); 
     TipoIdentificacion tipoIdentificacion = TipoIdentificacion.CC;
+    int id = 0;
+    Paciente paciente= null;
 
-    public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
-        this.tipoIdentificacion = tipoIdentificacion;
-    }
-
-    public TipoIdentificacion getTipoIdentificacion() {
-        return tipoIdentificacion;
+  
+    
+    public void ConsultarPaciente(int id) {    
+        try{
+            paciente=ServiciosPacientesFactory.getInstance().getForumsServices().consultarPacientesPorId(id, tipoIdentificacion);
+         
+        }catch(Exception e){
+             Logger.getLogger(PacientesBean.class.getName()).log(Level.SEVERE, null,e);
+        }
     }
 
     public List<Paciente> getData() throws Exception{
@@ -54,6 +63,37 @@ public class PacientesBean {
 
     public TipoIdentificacion[] getTiposIdentificacion() {
         return TipoIdentificacion.values();
+    }
+      public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
+        this.tipoIdentificacion = tipoIdentificacion;
+    }
+
+    public TipoIdentificacion getTipoIdentificacion() {
+        return tipoIdentificacion;
+    }
+
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
+
+    public void setPacientes(List<Paciente> pacientes) {
+        this.pacientes = pacientes;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
     
 }

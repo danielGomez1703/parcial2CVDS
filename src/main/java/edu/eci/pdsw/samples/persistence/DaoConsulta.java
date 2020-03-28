@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
+package edu.eci.pdsw.samples.persistence;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.entities.TipoIdentificacion;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 /**
  *
  * @author Jairo Gomez
  */
-public interface ConsultaMapper {
-        public List<Consulta> getConsultas();
-        public Consulta getConsulta(@Param("cId") int id);
+public interface DaoConsulta {
+    
+    public Consulta load(int id) throws PersistenceException;
+    
+    public List<Consulta> loadAll() throws PersistenceException;
+    
+    public void save(Consulta c) throws PersistenceException;
 }
